@@ -41,8 +41,7 @@ Warrior_Weapon_id int,
 Opponent_id int,
 Opponent_Weapon_id int,
 Injuries_Caused int,
-Injuries_Suffered int,
-Battle_Points int);
+Injuries_Suffered int);
 
 
 alter table ROUNDS add constraint PK_ROUNDS primary key (Round_id,Battle_id);
