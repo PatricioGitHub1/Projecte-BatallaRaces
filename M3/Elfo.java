@@ -12,6 +12,7 @@ public class Elfo {
 		this.defense = defense;
 		this.agility = agility;
 		this.speed = speed;
+		
 	}
 	
 	
