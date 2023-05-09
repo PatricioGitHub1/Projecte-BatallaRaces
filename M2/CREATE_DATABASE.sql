@@ -8,7 +8,8 @@ Weapon_id int primary key,
 Weapon_name varchar(30),
 Weapon_Image_Path varchar(100),
 Speed int,
-Strength int);
+Strength int,
+Points_value int);
 
 create table if not exists WARRIORS(
 Warrior_id int primary key auto_increment,
