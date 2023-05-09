@@ -1,14 +1,14 @@
-insert into PLAYERS (Player_name) values ('Root');
+insert into PLAYERS (Player_name,Total_Points) values ('Root',150);
 
-insert into WEAPONS (Weapon_id,Weapon_name,Weapon_Image_Path) values (1,'Daga','./imagenes/daga.jpg');
-insert into WEAPONS (Weapon_id,Weapon_name,Weapon_Image_Path) values (2,'Espasa','./imagenes/espasa.jpg');
-insert into WEAPONS (Weapon_id,Weapon_name,Weapon_Image_Path) values (3,'Destral','./imagenes/destral.jpg');
-insert into WEAPONS (Weapon_id,Weapon_name,Weapon_Image_Path) values (4,'Espases_dobles','./imagenes/espases_dobles.jpg');
-insert into WEAPONS (Weapon_id,Weapon_name,Weapon_Image_Path) values (5,'Simitarra','./imagenes/simitarra.jpg');
-insert into WEAPONS (Weapon_id,Weapon_name,Weapon_Image_Path) values (6,'Arc','./imagenes/arc.jpg');
-insert into WEAPONS (Weapon_id,Weapon_name,Weapon_Image_Path) values (7,'Katana','./imagenes/katana.jpg');
-insert into WEAPONS (Weapon_id,Weapon_name,Weapon_Image_Path) values (8,'Punyal','./imagenes/punyal.jpg');
-insert into WEAPONS (Weapon_id,Weapon_name,Weapon_Image_Path) values (9,'Destral_dues_mans','./imagenes/destral_dues_mans.jpg');
+insert into WEAPONS (Weapon_id,Weapon_name,Weapon_Image_Path,Speed,Strength) values (1,'Daga','./imagenes/daga.jpg',3,0);
+insert into WEAPONS (Weapon_id,Weapon_name,Weapon_Image_Path,Speed,Strength) values (2,'Espasa','./imagenes/espasa.jpg',1,1);
+insert into WEAPONS (Weapon_id,Weapon_name,Weapon_Image_Path,Speed,Strength) values (3,'Destral','./imagenes/destral.jpg',0,3);
+insert into WEAPONS (Weapon_id,Weapon_name,Weapon_Image_Path,Speed,Strength) values (4,'Espases_dobles','./imagenes/espases_dobles.jpg',2,2);
+insert into WEAPONS (Weapon_id,Weapon_name,Weapon_Image_Path,Speed,Strength) values (5,'Simitarra','./imagenes/simitarra.jpg',2,1);
+insert into WEAPONS (Weapon_id,Weapon_name,Weapon_Image_Path,Speed,Strength) values (6,'Arc','./imagenes/arc.jpg',5,1);
+insert into WEAPONS (Weapon_id,Weapon_name,Weapon_Image_Path,Speed,Strength) values (7,'Katana','./imagenes/katana.jpg',3,2);
+insert into WEAPONS (Weapon_id,Weapon_name,Weapon_Image_Path,Speed,Strength) values (8,'Punyal','./imagenes/punyal.jpg',4,0);
+insert into WEAPONS (Weapon_id,Weapon_name,Weapon_Image_Path,Speed,Strength) values (9,'Destral_dues_mans','./imagenes/destral_dues_mans.jpg',0,5);
 
 insert into WARRIORS (Warrior_id,Warrior_name,Warrior_Image_Path) values (1,'Arwen','./imagenes/elfo1.jpg');
 insert into WARRIORS (Warrior_id,Warrior_name,Warrior_Image_Path) values (2,'Legolas','./imagenes/elfo2.jpg');
@@ -112,6 +112,7 @@ Injuries_Caused,Injuries_Suffered) values(1,1,2,4,9,9,7,0);
 
 select * from WEAPONS;
 select * from WARRIORS;
+select * from PLAYERS;
 
 
 
