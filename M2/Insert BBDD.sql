@@ -110,9 +110,5 @@ Injuries_Caused,Injuries_Suffered,Battle_Points) values(1,2,4,9,8,40,35,100);
 insert into ROUNDS (Round_id,Battle_id,Warrior_id,Warrior_Weapon_id,Opponent_id,Opponent_Weapon_id,
 Injuries_Caused,Injuries_Suffered) values(1,1,2,4,9,9,7,0);
 
-select * from WEAPONS;
-select * from WARRIORS;
-select * from PLAYERS;
-
 
 
