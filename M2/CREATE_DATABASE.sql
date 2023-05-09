@@ -6,7 +6,9 @@ use RacesPAC;
 create table if not exists WEAPONS(
 Weapon_id int primary key,
 Weapon_name varchar(30),
-Weapon_Image_Path varchar(100));
+Weapon_Image_Path varchar(100),
+Speed int,
+Strength int);
 
 create table if not exists WARRIORS(
 Warrior_id int primary key auto_increment,
@@ -15,7 +17,8 @@ Warrior_Image_Path varchar (100));
 
 create table if not exists PLAYERS(
 Player_id int primary key auto_increment,
-Player_name varchar(45));
+Player_name varchar(45),
+Total_Points int);
 
 create table if not exists WEAPONS_AVAILABLE(
 Warrior_id int not null,	
