@@ -8,9 +8,12 @@ import java.util.Iterator;
 
 public class WarriorContainer {
 	private ArrayList<Warrior> warriorarray;
-	String urlDatos = "jdbc:mysql://localhost/RacesPAC?serverTimezone=UTC";
-	String usuario = "root";
-	String pass = "1234";
+	private String urlDatos = "jdbc:mysql://localhost/RacesPAC?serverTimezone=UTC";
+	private String usuario = "root";
+	private String pass = "1234";
+	public ArrayList<Warrior> getWarriorarray() {
+		return warriorarray;
+	}
 	WarriorContainer(){
 		warriorarray = new ArrayList<Warrior>();
 		try {
@@ -21,12 +24,15 @@ public class WarriorContainer {
 			ResultSet rs = ps.executeQuery();
 			
 			while (rs.next()) {
-				warriorarray.add(new Warrior(rs.getInt(1),rs.getString(2) , rs.getString(3)));
+				if (rs.getString(3).substring(11,rs.getString(3).lastIndexOf('.')-1).equals("elfo")) {
+					warriorarray.add(new Elf(rs.getInt(1),rs.getString(2) , rs.getString(3)));
+				}else if (rs.getString(3).substring(11,rs.getString(3).lastIndexOf('.')-1).equals("enano")) {
+					warriorarray.add(new Dwarf(rs.getInt(1),rs.getString(2) , rs.getString(3)));
+				}else {
+					warriorarray.add(new Human(rs.getInt(1),rs.getString(2) , rs.getString(3)));
+				}
+					
 			}
-			
-			for (Warrior nombrecito : warriorarray) {
-				 System.out.println(nombrecito.getWarrior_name()+", "+nombrecito.getId());
-			 }
 			
 		} catch (ClassNotFoundException e) {
 			System.out.println("EL driver no se a cargado con exito");
@@ -38,6 +44,10 @@ public class WarriorContainer {
 	}
 	
 	public static void main(String[] args) {
-		new WarriorContainer();
+		WarriorContainer c1 = new  WarriorContainer();
+		for (Warrior w :c1.getWarriorarray()) {
+			System.out.println(w.getImage_path());
+			
+		}
 	}
 }

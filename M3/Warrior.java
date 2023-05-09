@@ -1,33 +1,117 @@
 
 public class Warrior {
 	private int id;
-	private String warrior_name;
-	private String warrior_image_path;
+	private String name;
+	private String image_path;
+	private int health;
+	private int speed;
+	private int agility;
+	private int defense;
+	private int strength;
+	private int initial_health;
+	private int points_value;
 	
-	public Warrior(int id, String warrior_name, String warrior_image_path) {
+	public Warrior(int id, String name, String image_path) {
 		super();
 		this.id = id;
-		this.warrior_name = warrior_name;
-		this.warrior_image_path = warrior_image_path;
+		this.name = name;
+		this.image_path = image_path;
 	}
+	
+	
+
+	public int getPoints_value() {
+		return points_value;
+	}
+
+
+
+	public void setPoints_value(int points_value) {
+		this.points_value = points_value;
+	}
+
+
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getWarrior_name() {
-		return warrior_name;
+
+	public String getName() {
+		return name;
 	}
-	public void setWarrior_name(String warrior_name) {
-		this.warrior_name = warrior_name;
+
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getWarrior_image_path() {
-		return warrior_image_path;
+
+	public String getImage_path() {
+		return image_path;
 	}
-	public void setWarrior_image_path(String warrior_image_path) {
-		this.warrior_image_path = warrior_image_path;
+
+	public void setImage_path(String image_path) {
+		this.image_path = image_path;
 	}
+
+	public int getHealth() {
+		return health;
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
+	}
+
+	public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+
+	public int getAgility() {
+		return agility;
+	}
+
+	public void setAgility(int agility) {
+		this.agility = agility;
+	}
+
+	public int getDefense() {
+		return defense;
+	}
+
+	public void setDefense(int defense) {
+		this.defense = defense;
+	}
+
+	public int getStrength() {
+		return strength;
+	}
+
+	public void setStrength(int strength) {
+		this.strength = strength;
+	}
+	
+	public void resetStats() {
+        setHealth(getInitial_health());
+    }
+
+	public int getInitial_health() {
+		return initial_health;
+	}
+
+	public void setInitial_health(int initial_health) {
+		this.initial_health = initial_health;
+		this.setHealth(initial_health);
+	}
+	
+	
+	
+	
 	
 	
 
