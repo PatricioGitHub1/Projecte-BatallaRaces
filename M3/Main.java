@@ -26,7 +26,7 @@ public class Main {
 				int random_value = (int) (1 + (Math.random()*5));
 				players_ingame[i] = new Player(ishuman, 
 						
-						new Warrior(random_id, "Warrior "+i, 100+random_value*10, 
+						new Warrior(random_id, "Warrior "+i, random_value*10, 
 						random_value, random_value+2, random_value+1, (int)random_value/2, 
 						user_name), 
 						
@@ -39,35 +39,44 @@ public class Main {
 			//FALSO = POSICION 0, VERDADERO = POSICION 1
 			boolean turno = MyFunctions.getFasterWarrior(players_ingame);	
 			for (Player pl: players_ingame) {
-				System.out.println(pl.toString());
+				System.out.println(pl.getWarrior().toString());
 			}
 			
 			//ESTO ES EL WHILE DE LAS RONDAS
 			int ronda = 0;
 			do {
+				ronda = ronda + 1;
 				//FALSO = POSICION 0, VERDADERO = POSICION 1
 				int percentageAtkHits = 1 + (int) (Math.random() * 101);
+				System.out.println("=============================================================================");
 				if (turno) {
 					System.out.println("Round number "+ronda+" | Turn of "+players_ingame[1].getWarrior().getName());
-					if (true) {
-						
-					}
-					turno = false;
+					turno = MyFunctions.roundFight(players_ingame[1], players_ingame[0], percentageAtkHits, turno);
 				} else if (!turno) {
 					System.out.println("Round number "+ronda+" | Turn of "+players_ingame[0].getWarrior().getName());	
-					
-					turno = true;
+					turno = MyFunctions.roundFight(players_ingame[0], players_ingame[1], percentageAtkHits, turno);
 				}
 				
-				ronda = ronda++;
-				
 				for (Player pl: players_ingame) {
+					System.out.println(pl.getWarrior().toString());
 					if (pl.getWarrior().getVida() <= 0) {
 						isFighting = false;
 					}
 				}
 				
 			} while(isFighting);
+			Player winner = null;
+			for (Player pl: players_ingame) {
+				if (pl.getWarrior().getVida() > 0) {
+					winner = pl;
+					break;
+				}
+			}
+			System.out.println("The winner of the fight is "+winner.getWarrior().getName());
+			System.out.print("Do you want to play again?: ");
+			sc.next();
+			//Esto es para acabar de jugar en una batalla
+			isPlaying = false;
 		}
 	}
 
