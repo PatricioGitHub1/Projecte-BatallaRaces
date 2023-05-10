@@ -24,7 +24,7 @@ public class FrameWarriors extends JFrame{
 	
 	
 	
-	FrameWarriors(){
+	FrameWarriors(int cont,String username){
 		arraylabels = new ArrayList<JLabel>();
 		WarriorContainer w1 = new WarriorContainer();
 		for (int i=0;i<w1.getWarriorarray().size();i++) {
@@ -38,14 +38,14 @@ public class FrameWarriors extends JFrame{
 		
 		for (int i = 0; i<arraylabels.size();i++) {
 			JLabel label = arraylabels.get(i);
-			System.out.println(arraylabels.indexOf(label));
 			arraylabels.get(i).addMouseListener(new MouseAdapter() {
 			
 				public void mouseClicked(MouseEvent e) {
 					int index = arraylabels.indexOf(label);
 
 					dispose();
-					new FrameWeapons(w1.getWarriorarray().get(index).getId());
+					new VentanaLucha(w1.getWarriorarray().get(index).getImage_path(), "./imagenes/?.jpg", "./imagenes/?.jpg", "./imagenes/?.jpg",w1.getWarriorarray().get(index).getId(),username);
+					//new FrameWeapons(w1.getWarriorarray().get(index).getId(),w1.getWarriorarray().get(index).getImage_path());
 					
 				}
 				
@@ -77,7 +77,6 @@ public class FrameWarriors extends JFrame{
 			
 		}
 	public static void main(String[] args) {
-		new FrameWarriors();
 
 	}
 

@@ -24,7 +24,7 @@ public class FrameWeapons extends JFrame{
 	private String usuario = "root";
 	private String pass = "1234";
 	
-	FrameWeapons(int id){
+	FrameWeapons(int id,String warriorpath,String username){
 		ArrayList<Integer> arrayid = new ArrayList<Integer>();
 		arraylabels = new ArrayList<JLabel>();
 		WeaponsContainer w1 = new WeaponsContainer();
@@ -51,6 +51,30 @@ public class FrameWeapons extends JFrame{
 				}
 			}
 			
+			for (int i = 0; i<arraylabels.size();i++) {
+				JLabel label = arraylabels.get(i);
+				arraylabels.get(i).addMouseListener(new MouseAdapter() {
+				
+					public void mouseClicked(MouseEvent e) {
+						int z = 0;
+						int index = arraylabels.indexOf(label);
+						for (int x = 0;x<w1.getWeaponsarray().size();x++) {
+							if (w1.getWeaponsarray().get(x).getId()==arrayid.get(index)) {
+								z = x;
+								break;
+							}
+						}
+						
+						System.out.println(w1.getWeaponsarray().get(z).getId());
+						System.out.println(arrayid.get(index));
+						dispose();
+						new VentanaLucha(warriorpath,w1.getWeaponsarray().get(z).getWeapon_image_path(),"./imagenes/?.jpg","./imagenes/?.jpg",id,username);
+						
+					}
+					
+				});
+			}
+			
 			
 			p0 = new JPanel();
 			p1 = new JPanel();
@@ -75,7 +99,6 @@ public class FrameWeapons extends JFrame{
 	
 	
 	public static void main(String[] args) {
-		new FrameWeapons(1);
 
 	}
 
