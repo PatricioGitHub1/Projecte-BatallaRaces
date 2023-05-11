@@ -100,8 +100,9 @@ public class VentanaPrincipal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (valido == true) {
+					String imagen = "./imagenes/?.jpg";
 					dispose();
-					new VentanaLucha("./imagenes/?.jpg","./imagenes/?.jpg","./imagenes/?.jpg","./imagenes/?.jpg",0,username);
+					new VentanaLucha(imagen,imagen,imagen,imagen,0,username,null,null,null,null);
 				}else {
 					error.setText("Username not permitted");
 				}

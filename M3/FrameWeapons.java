@@ -24,7 +24,7 @@ public class FrameWeapons extends JFrame{
 	private String usuario = "root";
 	private String pass = "1234";
 	
-	FrameWeapons(int id,String warriorpath,String username){
+	FrameWeapons(int id,String warriorpath,String username,String botimg, String botweapon,Warrior warrior_enemy, Weapons weapons_enemy,Warrior user_warrior,Weapons user_weapon){
 		ArrayList<Integer> arrayid = new ArrayList<Integer>();
 		arraylabels = new ArrayList<JLabel>();
 		WeaponsContainer w1 = new WeaponsContainer();
@@ -64,11 +64,8 @@ public class FrameWeapons extends JFrame{
 								break;
 							}
 						}
-						
-						System.out.println(w1.getWeaponsarray().get(z).getId());
-						System.out.println(arrayid.get(index));
 						dispose();
-						new VentanaLucha(warriorpath,w1.getWeaponsarray().get(z).getWeapon_image_path(),"./imagenes/?.jpg","./imagenes/?.jpg",id,username);
+						new VentanaLucha(warriorpath,w1.getWeaponsarray().get(z).getWeapon_image_path(),botimg,botweapon,id,username,warrior_enemy,weapons_enemy,user_warrior,w1.getWeaponsarray().get(z));
 						
 					}
 					

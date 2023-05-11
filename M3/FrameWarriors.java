@@ -44,7 +44,11 @@ public class FrameWarriors extends JFrame{
 					int index = arraylabels.indexOf(label);
 
 					dispose();
-					new VentanaLucha(w1.getWarriorarray().get(index).getImage_path(), "./imagenes/?.jpg", "./imagenes/?.jpg", "./imagenes/?.jpg",w1.getWarriorarray().get(index).getId(),username);
+					WarriorEnemy we = new WarriorEnemy();
+					int id_warrior = w1.getWarriorarray().get(index).getId();
+					Warrior warrior_enemy = we.getWarrior_enemy();
+					Weapons weapon_enemy = we.getWeapon();
+					new VentanaLucha(w1.getWarriorarray().get(index).getImage_path(), "./imagenes/?.jpg", we.getWarrior_enemy().getImage_path(),we.getWeapon().getWeapon_image_path() ,id_warrior,username,warrior_enemy,weapon_enemy,w1.getWarriorarray().get(index),null);
 					//new FrameWeapons(w1.getWarriorarray().get(index).getId(),w1.getWarriorarray().get(index).getImage_path());
 					
 				}
