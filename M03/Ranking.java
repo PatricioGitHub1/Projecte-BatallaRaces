@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
@@ -41,8 +42,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class Ranking extends JFrame {
-	private JPanel p0,p1,p2,p3,panel1;
-	private JLabel titulo,subtitulo,creators;
+	private JPanel p0,p1,p2,p3,panel1,p4;
+	private JLabel subtitulo,creators;
 	private JButton back,exit;
 	private String urlDatos = "jdbc:mysql://localhost/RacesPAC?serverTimezone=UTC";
 	private String usuario = "root";
@@ -51,9 +52,11 @@ public class Ranking extends JFrame {
 
 	public Ranking() {
 		p0 = new JPanel();
-		p1 = new JPanel();
+		p1 = new JPanel(new GridLayout(10, 2));
 		p2 = new JPanel();
 		p3 = new JPanel();
+		p4 = new JPanel();
+		
 		back = new JButton("Back");
 		exit = new JButton("Exit");
 		p2.add(back);
@@ -74,14 +77,12 @@ public class Ranking extends JFrame {
 				}
 			}
 		};
-		titulo = new JLabel("Ranking");
-		Font font = new Font("Dialog", Font.BOLD, 30);
-		titulo.setFont(font);
+		
 		subtitulo = new JLabel("Top 10 of players");
-		Font font1 = new Font("Arial", Font.BOLD, 20);
+		Font font1 = new Font("Arial", Font.BOLD, 30);
 		subtitulo.setFont(font1);
-		p1.add(titulo);
-		p1.add(subtitulo);
+	
+		p4.add(subtitulo);
 		creators = new JLabel("By Cristian Alvarez | Alex Martinez | Patricio");
 		creators.setFont(new Font("Abyssinica SIL", Font.ITALIC, 10));
 		
@@ -94,10 +95,12 @@ public class Ranking extends JFrame {
 			
 			while(rs.next()) {
 					JLabel label = new JLabel(rs.getString("Player_name"));
-					label.setText(label.getText()+"                   "+(Integer.toString(rs.getInt("Total_points"))));
+					JLabel label1 = new JLabel(Integer.toString(rs.getInt("Total_points")));
 					Font font3 = new Font("Arial", Font.PLAIN, 18);
 					label.setFont(font3);
+					label1.setFont(font3);
 					p1.add(label);
+					p1.add(label1);
 	        }
 			
 
@@ -109,17 +112,19 @@ public class Ranking extends JFrame {
 		}
 		
 		p0.setLayout(new BoxLayout(p0, BoxLayout.Y_AXIS));
-		p1.setLayout(new BoxLayout(p1, BoxLayout.Y_AXIS));
-		
+	
 		p0.add(panel1);
-		p0.add(p1,BorderLayout.CENTER);
+		p0.add(p4);
+		p0.add(p1);
 		p3.add(creators);
 		p0.add(p2);
 		p0.add(p3);
 		p0.setLayout(null);
+		
 		panel1.setBounds(0, 0, 1250, 400);
-		p1.setBounds(550, 400, 1250, 280);
-		p2.setBounds(0, 680, 1250, 50);
+		p4.setBounds(550,430,11250,50);
+		p1.setBounds(550, 430, 300, 280);
+		p2.setBounds(0, 710, 1250, 30);
 		p3.setBounds(0, 740, 1250, 50);
 		this.add(p0);
 		
