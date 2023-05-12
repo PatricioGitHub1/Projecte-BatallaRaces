@@ -1,0 +1,80 @@
+<?xml version="1.0" ?>
+<Battles>
+	<battle battle_id="5">
+		<player_name>Pablo</player_name>
+		<player_id>4</player_id>
+		<warrior_id>2</warrior_id>
+		<warrior_weapon_id>4</warrior_weapon_id>
+		<opponent_id>9</opponent_id>
+		<opponent_weapon_id>8</opponent_weapon_id>
+		<injuries_caused>40</injuries_caused>
+		<injuries_suffered>35</injuries_suffered>
+		<battle_points>101</battle_points>
+	</battle>
+	<battle battle_id="1">
+		<player_name>Root</player_name>
+		<player_id>1</player_id>
+		<warrior_id>2</warrior_id>
+		<warrior_weapon_id>4</warrior_weapon_id>
+		<opponent_id>9</opponent_id>
+		<opponent_weapon_id>8</opponent_weapon_id>
+		<injuries_caused>40</injuries_caused>
+		<injuries_suffered>35</injuries_suffered>
+		<battle_points>100</battle_points>
+	</battle>
+	<battle battle_id="3">
+		<player_name>Pepe</player_name>
+		<player_id>2</player_id>
+		<warrior_id>2</warrior_id>
+		<warrior_weapon_id>4</warrior_weapon_id>
+		<opponent_id>9</opponent_id>
+		<opponent_weapon_id>8</opponent_weapon_id>
+		<injuries_caused>40</injuries_caused>
+		<injuries_suffered>35</injuries_suffered>
+		<battle_points>92</battle_points>
+	</battle>
+	<battle battle_id="6">
+		<player_name>Maria</player_name>
+		<player_id>5</player_id>
+		<warrior_id>2</warrior_id>
+		<warrior_weapon_id>4</warrior_weapon_id>
+		<opponent_id>9</opponent_id>
+		<opponent_weapon_id>8</opponent_weapon_id>
+		<injuries_caused>40</injuries_caused>
+		<injuries_suffered>35</injuries_suffered>
+		<battle_points>89</battle_points>
+	</battle>
+	<battle battle_id="8">
+		<player_name>Alex</player_name>
+		<player_id>7</player_id>
+		<warrior_id>2</warrior_id>
+		<warrior_weapon_id>4</warrior_weapon_id>
+		<opponent_id>9</opponent_id>
+		<opponent_weapon_id>8</opponent_weapon_id>
+		<injuries_caused>40</injuries_caused>
+		<injuries_suffered>35</injuries_suffered>
+		<battle_points>52</battle_points>
+	</battle>
+	<battle battle_id="7">
+		<player_name>Joan</player_name>
+		<player_id>6</player_id>
+		<warrior_id>2</warrior_id>
+		<warrior_weapon_id>4</warrior_weapon_id>
+		<opponent_id>9</opponent_id>
+		<opponent_weapon_id>8</opponent_weapon_id>
+		<injuries_caused>40</injuries_caused>
+		<injuries_suffered>35</injuries_suffered>
+		<battle_points>34</battle_points>
+	</battle>
+	<battle battle_id="4">
+		<player_name>Juan</player_name>
+		<player_id>3</player_id>
+		<warrior_id>2</warrior_id>
+		<warrior_weapon_id>4</warrior_weapon_id>
+		<opponent_id>9</opponent_id>
+		<opponent_weapon_id>8</opponent_weapon_id>
+		<injuries_caused>40</injuries_caused>
+		<injuries_suffered>35</injuries_suffered>
+		<battle_points>11</battle_points>
+	</battle>
+</Battles>
