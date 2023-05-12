@@ -16,6 +16,12 @@ public class WarriorContainer {
 	}
 	WarriorContainer(){
 		warriorarray = new ArrayList<Warrior>();
+		
+		
+			
+	}
+	
+	public void addWArrior() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(urlDatos,usuario,pass);
@@ -38,16 +44,6 @@ public class WarriorContainer {
 			System.out.println("EL driver no se a cargado con exito");
 		} catch (SQLException e) {
 			System.out.println("Conexion no creada con exito!!");
-		}
-		
-			
-	}
-	
-	public static void main(String[] args) {
-		WarriorContainer c1 = new  WarriorContainer();
-		for (Warrior w :c1.getWarriorarray()) {
-			System.out.println(w.getImage_path());
-			
 		}
 	}
 }

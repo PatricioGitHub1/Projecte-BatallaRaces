@@ -3,32 +3,55 @@ public class Fight {
 	private int enemy_health;
 	private int player_health;
 	private int total_points=0;
-	private boolean turno;
+	private boolean turn;
+	private boolean win;
+	private int rounds;
 	
 	
 	
-	Fight(String userimg, String userweapon, String botimg, String botweapon,int id,String username,Warrior warrior_enemy, Weapons weapons_enemy,Warrior user_warrior,Weapons user_weapon,int round){
+	
+	
+	
+	public int getRounds() {
+		return rounds;
+	}
+
+	public void setRounds(int rounds) {
+		this.rounds = rounds;
+	}
+
+	public boolean isWin() {
+		return win;
+	}
+
+	Fight(){		
+	}
+	
+	public void lucha (String username,Warrior warrior_enemy, Weapons weapons_enemy,Warrior user_warrior,Weapons user_weapon) {
 		VentanaLucha vn = VentanaLucha.getInstance();
-		if (round == 1) {
-			turno = getFasterWarrior(user_warrior, warrior_enemy, user_weapon, weapons_enemy);
+		rounds++;
+		if (rounds == 1) {
+			turn = getFasterWarrior(user_warrior, warrior_enemy, user_weapon, weapons_enemy);
 		}
 		
-		vn.consoleText(String.valueOf(turno));
+		
 		//FALSO = BOT, VERDADERO = HUMANO
 		int percentageAtkHits = 1 + (int) (Math.random() * 101);
 		vn.consoleText("=============================================================================");
-		if (turno) {
-			vn.consoleText("Round number "+round+" | Turn of "+username);
-			turno = roundFight(user_warrior, warrior_enemy,user_weapon,weapons_enemy,turno);
-		} else if (!turno) {
-			vn.consoleText("Round number "+round+" | Turn of bot");	
-			turno = roundFight(warrior_enemy, user_warrior,weapons_enemy,user_weapon,turno);
+		if (turn) {
+			vn.consoleText("Round number "+rounds+" | Turn of "+username);
+			turn = roundFight(user_warrior, warrior_enemy,user_weapon,weapons_enemy,turn);
+		} else if (!turn) {
+			vn.consoleText("Round number "+rounds+" | Turn of bot");	
+			turn = roundFight(warrior_enemy, user_warrior,weapons_enemy,user_weapon,turn);
 		}
-		
 		
 	}
 	
-	 boolean roundFight(Warrior attacker, Warrior defender,Weapons weapon_attacker,Weapons weapon_defender,boolean turno) {
+	
+	
+	
+	boolean roundFight(Warrior attacker, Warrior defender,Weapons weapon_attacker,Weapons weapon_defender,boolean turno) {
 		VentanaLucha vn = VentanaLucha.getInstance();
 		vn.consoleText("=============================================================================");
 		int percentageAtkHits = 1 + (int) (Math.random() * 101);
@@ -63,7 +86,7 @@ public class Fight {
 					vn.consoleText("El atacante vuelve a atacar");
 					return turno;
 				}
-				vn.consoleText("Se cambian los roles");	
+				vn.consoleText("Se cambian los roles");
 				return changeTurn(turno);
 				}
 			

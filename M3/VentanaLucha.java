@@ -42,11 +42,11 @@ public class VentanaLucha extends JFrame {
 	private PlayersImage playimage;
 	private JPanel panel0, panel1, panel2, panel3;
 	private JButton chooseCharacter, chooseWeapon,ranking,fight,clear;
-	private int cont=0,total_points=0;
 	private String urlDatos = "jdbc:mysql://localhost/RacesPAC?serverTimezone=UTC";
 	private String usuario = "root";
 	private String pass = "1234";
 	private JTextArea console;
+	private Fight f;
 	
 	public VentanaLucha(String userimg, String userweapon, String botimg, String botweapon,int id,String username,Warrior warrior_enemy, Weapons weapons_enemy,Warrior user_warrior,Weapons user_weapon) {
 		instance = this;
@@ -95,7 +95,8 @@ public class VentanaLucha extends JFrame {
         panel0.add(panel2);
         panel0.add(panel3);
         panel0.add(scrollPane);
-        
+		f=new Fight();
+
         ranking.addActionListener(new ActionListener() {
 			
 			@Override
@@ -108,7 +109,7 @@ public class VentanaLucha extends JFrame {
         chooseCharacter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (cont>=1) {
+				if (f.getRounds()>=1) {
 					try {
 						Class.forName("com.mysql.cj.jdbc.Driver");
 						Connection conn = DriverManager.getConnection(urlDatos,usuario,pass);
@@ -125,7 +126,7 @@ public class VentanaLucha extends JFrame {
 					}
 				}
 				dispose();
-				new FrameWarriors(cont,username);
+				new FrameWarriors(f.getRounds(),username);
 				
 			}
 		});
@@ -144,10 +145,7 @@ public class VentanaLucha extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				cont+=1;
-				Fight f=new Fight(userimg,userweapon,botimg,botweapon,id,username,warrior_enemy,weapons_enemy,user_warrior,user_weapon,cont);
-				total_points=f.getTotal_points();
+				f.lucha(username, warrior_enemy, weapons_enemy, user_warrior, user_weapon);
 			}
 		});
         

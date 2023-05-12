@@ -16,12 +16,15 @@ public class WarriorEnemy {
 	private Warrior warrior_enemy;
 	private Weapons weapon;
 	WarriorEnemy(){
+	}
+	public void Enemy_Random() {
 		try {
 			Random random = new Random();
 			
 			arrayids = new ArrayList<Integer>();
 			WarriorContainer w1 = new WarriorContainer();
 			WeaponsContainer w2 = new WeaponsContainer();
+			w1.addWArrior();
 			num2 = random.nextInt(w1.getWarriorarray().size());
 			warrior_enemy = w1.getWarriorarray().get(num2);
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -44,9 +47,6 @@ public class WarriorEnemy {
 			System.out.println(y.getMessage());
 			System.out.println("Conexion no creada con exito!!");
 		}
-		
-		
-		
 	}
 	
 	public Warrior getWarrior_enemy() {
@@ -64,8 +64,4 @@ public class WarriorEnemy {
 	public void setWeapon(Weapons weapon) {
 		this.weapon = weapon;
 	}
-
-	public static void main(String[] args) {
-        new WarriorEnemy();
-    }
 }
