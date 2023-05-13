@@ -1,17 +1,32 @@
+import java.util.ArrayList;
 
-public class Fight {
+public class Fight extends PlayersImage{
 	private int enemy_health;
 	private int player_health;
 	private int total_points=0;
 	private boolean turn;
 	private boolean win;
 	private int rounds;
+	private ArrayList<Rounds> roundsarray;
+	private int totalDamage;
 	
 	
 	
 	
 	
 	
+	
+	
+	
+	
+	public ArrayList<Rounds> getRoundsarray() {
+		return roundsarray;
+	}
+
+	public int getTotalDamage() {
+		return totalDamage;
+	}
+
 	public int getRounds() {
 		return rounds;
 	}
@@ -24,16 +39,21 @@ public class Fight {
 		return win;
 	}
 
-	Fight(){		
-	}
 	
+	
+	public Fight(String userimg, String userweapon, String botimg, String botweapon) {
+		super(userimg, userweapon, botimg, botweapon);
+		roundsarray = new ArrayList<Rounds>();
+		
+	}
+
 	public void lucha (String username,Warrior warrior_enemy, Weapons weapons_enemy,Warrior user_warrior,Weapons user_weapon) {
+		BBDD bd = new BBDD();
 		VentanaLucha vn = VentanaLucha.getInstance();
 		rounds++;
 		if (rounds == 1) {
 			turn = getFasterWarrior(user_warrior, warrior_enemy, user_weapon, weapons_enemy);
 		}
-		
 		
 		//FALSO = BOT, VERDADERO = HUMANO
 		int percentageAtkHits = 1 + (int) (Math.random() * 101);
@@ -41,10 +61,19 @@ public class Fight {
 		if (turn) {
 			vn.consoleText("Round number "+rounds+" | Turn of "+username);
 			turn = roundFight(user_warrior, warrior_enemy,user_weapon,weapons_enemy,turn);
+			roundsarray.add(new Rounds(bd.cogerId(username),user_warrior.getId(),user_weapon.getId(),warrior_enemy.getId(),weapons_enemy.getId(),getTotalDamage(),0));
 		} else if (!turn) {
 			vn.consoleText("Round number "+rounds+" | Turn of bot");	
 			turn = roundFight(warrior_enemy, user_warrior,weapons_enemy,user_weapon,turn);
+			roundsarray.add(new Rounds(bd.cogerId(username),user_warrior.getId(),user_weapon.getId(),warrior_enemy.getId(),weapons_enemy.getId(),0,getTotalDamage()));
 		}
+		
+		if (warrior_enemy.getHealth()==0 || user_warrior.getHealth()==0) {
+			rounds=0;
+			total_points=warrior_enemy.getPoints_value()+weapons_enemy.getPoints_value();
+		}
+		
+		
 		
 	}
 	
@@ -65,7 +94,7 @@ public class Fight {
 				return changeTurn(turno);
 			} else {
 				//EN ESTE CASO EL ATAQUE HA TENIDO EXITO Y EL DEFENSOR NO HA PODIDO DEFENDERSE
-				int totalDamage = attacker.getStrength() + weapon_attacker.getStrength() - defender.getDefense();
+				totalDamage = attacker.getStrength() + weapon_attacker.getStrength() - defender.getDefense();
 				int updatedDefHealth = defender.getHealth() - totalDamage;
 				defender.setHealth(updatedDefHealth);
 				vn.consoleText(defender.getName() + " ha rebut "+totalDamage+ " punts de dany per part de "+attacker.getName());

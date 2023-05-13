@@ -47,6 +47,7 @@ public class VentanaLucha extends JFrame {
 	private String pass = "1234";
 	private JTextArea console;
 	private Fight f;
+	private BBDD bd;
 	
 	public VentanaLucha(String userimg, String userweapon, String botimg, String botweapon,int id,String username,Warrior warrior_enemy, Weapons weapons_enemy,Warrior user_warrior,Weapons user_weapon) {
 		instance = this;
@@ -55,6 +56,7 @@ public class VentanaLucha extends JFrame {
         panel2 = new JPanel();
         panel3 = new JPanel();
         clear = new JButton("Clear Console");
+        bd = new BBDD();
         
         console = new JTextArea();
         console.setEditable(false);
@@ -68,10 +70,7 @@ public class VentanaLucha extends JFrame {
 
                     }
                 });
-        
-        
-        
-        
+
         playimage = new PlayersImage(userimg,userweapon,botimg,botweapon);
         chooseCharacter = new JButton("Choose Character");
         chooseWeapon = new JButton("Choose Weapon");
@@ -95,7 +94,7 @@ public class VentanaLucha extends JFrame {
         panel0.add(panel2);
         panel0.add(panel3);
         panel0.add(scrollPane);
-		f=new Fight();
+		f=new Fight( userimg,  userweapon,  botimg,  botweapon);
 
         ranking.addActionListener(new ActionListener() {
 			
@@ -107,26 +106,17 @@ public class VentanaLucha extends JFrame {
 		});
         
         chooseCharacter.addActionListener(new ActionListener() {
+        	
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				if (f.getRounds()>=1) {
-					try {
-						Class.forName("com.mysql.cj.jdbc.Driver");
-						Connection conn = DriverManager.getConnection(urlDatos,usuario,pass);
-						String query = "insert into PLAYERS (Player_name,Total_Points) values (?,?);";
-						PreparedStatement ps = conn.prepareStatement(query);
-						ps.setString(1, username);
-						ps.setInt(2, total_points);
-						ps.executeUpdate();
-						
-					} catch (ClassNotFoundException x) {
-						System.out.println("EL driver no se a cargado con exito");
-					} catch (SQLException y) {
-						System.out.println("Conexion no creada con exito!!");
-					}
+					f.getRoundsarray().clear();
+					bd.updatePlayer(username, f.getTotal_points());
+					
 				}
 				dispose();
-				new FrameWarriors(f.getRounds(),username);
+				new FrameWarriors(username);
 				
 			}
 		});
@@ -135,8 +125,14 @@ public class VentanaLucha extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				new FrameWeapons(id,userimg,username,botimg,botweapon,warrior_enemy,weapons_enemy,user_warrior,user_weapon);
+				if (userimg!="./imagenes/-.jpg") {
+					clearConsole();
+					dispose();
+					new FrameWeapons(id,userimg,username,botimg,botweapon,warrior_enemy,weapons_enemy,user_warrior,user_weapon);
+				}else {
+					consoleText("Tienes que elegir primer un guerrero");
+				}
+				
 				
 			}
 		});
@@ -145,14 +141,17 @@ public class VentanaLucha extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				f.lucha(username, warrior_enemy, weapons_enemy, user_warrior, user_weapon);
+				if (userimg!="./imagenes/-.jpg" && userweapon!="./imagenes/-.jpg") {
+					f.lucha(username, warrior_enemy, weapons_enemy, user_warrior, user_weapon);
+				}
+				
 			}
 		});
         
         this.add(panel0);
         panel0.setLayout(new BoxLayout(panel0, BoxLayout.Y_AXIS));
         
-        setSize(1250, 600);
+        setSize(1250, 800);
         setResizable(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -174,11 +173,6 @@ public class VentanaLucha extends JFrame {
 	
 	
 	
-	public static void main(String[] args) {
-		
-
-	}
-	
 	
 }
 
@@ -199,6 +193,10 @@ class PlayersImage extends JPanel{
     private int hp_user;
 	private int hp_bot;
 	private String userimg1,userweapon1,botimg1,botweapon1;
+	
+	public PlayersImage() {
+		// TODO Auto-generated constructor stub
+	}
     
     public PlayersImage(String userimg, String userweapon, String botimg, String botweapon) {
     	userimg1 = userimg;
@@ -267,37 +265,11 @@ class PlayersImage extends JPanel{
 		String linkweaponuser = userweapon1;
 		String linkweaponbot = botweapon1;
 		
-		super.paintComponent(g);
-		g.setColor(Color.BLACK);
-		//barras rojas
-		g.drawRect(0, 0, 500, 60);
-		g.drawRect(750, 0, 500, 60);
-		g.setColor(Color.RED);
-		g.fillRect(0, 0, 500, 60);
-		g.fillRect(750, 0, 500, 60);
-		//barras verdes
-		g.setColor(Color.GREEN);
-		// SE CAMBIA EL tercero
-		g.fillRect(0, 0, 500, 60);
-		//inicial 750 y aplicar suma SE CAMBIA LA X
-		g.fillRect(750, 0, 500, 60);
-
-		g.setColor(Color.BLACK);
-		g.setFont(new Font("AnjaliOldLipi", Font.BOLD, 16));
-		int x1 = (450 - g.getFontMetrics().stringWidth(user_life)) / 2;
-		int y1 = (60 + g.getFontMetrics().getHeight()) / 2;
-		g.drawString(user_life, x1, y1);
 		
-		int x2 = (2000 - g.getFontMetrics().stringWidth(bot_life)) / 2;
-		int y2 = (60 + g.getFontMetrics().getHeight()) / 2;
-		g.drawString(bot_life, x2, y2);
+		
         
-		// BARRAS DE USUARIO
-		g.setColor(Color.BLACK);
-		g.drawRect(300, 431, 200, 23);
-		g.drawRect(300, 454, 200, 23);
-		g.drawRect(300, 477, 200, 23);
-		g.drawRect(300, 500, 200, 23);
+		
+		
 		//se cambia el tercer valor a menor
 		//power
 		g.setColor(Color.red);
@@ -313,11 +285,7 @@ class PlayersImage extends JPanel{
 		g.fillRect(301, 501, 199, 22);
 		
 		
-		// BARRAS DE USUARIO;
-		g.drawRect(1049, 431, 200, 23);
-		g.drawRect(1049, 454, 200, 23);
-		g.drawRect(1049, 477, 200, 23);
-		g.drawRect(1049, 500, 200, 23);
+		
 		
 		//se cambia el tercer valor a menor
 		//power
@@ -381,4 +349,8 @@ class PlayersImage extends JPanel{
         
     }
     
-};
+    public void hola() {
+    	System.out.println("hola");
+    }
+    
+}

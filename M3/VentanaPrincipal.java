@@ -22,9 +22,11 @@ public class VentanaPrincipal extends JFrame {
     private JButton save, start,exit;
     private String username;
     private boolean valido = false;
+    private BBDD bd;
 
     public VentanaPrincipal() {
         panel0 = new JPanel();
+        bd = new BBDD();
         panel1 = new JPanel() {
             private BufferedImage image;
             private int newWidth = 1250;
@@ -100,7 +102,8 @@ public class VentanaPrincipal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (valido == true) {
-					String imagen = "./imagenes/?.jpg";
+					String imagen = "./imagenes/-.jpg";
+					bd.insertPlayer(username);
 					dispose();
 					new VentanaLucha(imagen,imagen,imagen,imagen,0,username,null,null,null,null);
 				}else {

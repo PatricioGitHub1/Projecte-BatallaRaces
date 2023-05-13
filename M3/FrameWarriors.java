@@ -24,7 +24,7 @@ public class FrameWarriors extends JFrame{
 	
 	
 	
-	FrameWarriors(int cont,String username){
+	FrameWarriors(String username){
 		arraylabels = new ArrayList<JLabel>();
 		WarriorContainer w1 = new WarriorContainer();
 		w1.addWArrior();
@@ -50,7 +50,7 @@ public class FrameWarriors extends JFrame{
 					we.Enemy_Random();
 					Warrior warrior_enemy = we.getWarrior_enemy();
 					Weapons weapon_enemy = we.getWeapon();
-					new VentanaLucha(w1.getWarriorarray().get(index).getImage_path(), "./imagenes/?.jpg", we.getWarrior_enemy().getImage_path(),we.getWeapon().getWeapon_image_path() ,id_warrior,username,warrior_enemy,weapon_enemy,w1.getWarriorarray().get(index),null);
+					new VentanaLucha(w1.getWarriorarray().get(index).getImage_path(), "./imagenes/-.jpg", we.getWarrior_enemy().getImage_path(),we.getWeapon().getWeapon_image_path() ,id_warrior,username,warrior_enemy,weapon_enemy,w1.getWarriorarray().get(index),null);
 					
 					
 				}

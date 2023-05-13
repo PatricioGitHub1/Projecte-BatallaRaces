@@ -6,13 +6,19 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 
 public class BBDD {
-	private String urlDatos = "jdbc:mysql://localhost/RacesPAC?serverTimezone=UTC";
+	private String urlDatos = "jdbc:mysql://localhost/racespac?serverTimezone=UTC";
 	private String usuario = "root";
 	private String pass = "1234";
+	
+	BBDD(){
+		
+	}
+	
 	public void addRounds(ArrayList<Rounds> array) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -38,19 +44,54 @@ public class BBDD {
 	
 	
 	public int cogerId(String username) {
-		int id=0;
+		int id=-1;
 		try {
-			
+			Connection conn = DriverManager.getConnection(urlDatos, usuario, pass);
+            Statement stmt = conn.createStatement();
+            String query = "SELECT max(player_id) from players";
+            ResultSet rs = stmt.executeQuery(query);
+            
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+		} catch (SQLException y) {
+			System.out.println(y.getMessage());
+			System.out.println("Conexion no creada con exito!!");
+		}
+		return id;
+	}
+	
+	public void insertPlayer(String username) {
+		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(urlDatos,usuario,pass);
-			String query="select player_id from PLAYERS where player_name = "+username;
+			String query = "insert into PLAYERS (Player_name,Total_Points) values (?,?);";
 			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setString(1, username);
+			ps.setInt(2, 0);
+			ps.executeUpdate();
 		} catch (ClassNotFoundException x) {
 			System.out.println("EL driver no se a cargado con exito");
 		} catch (SQLException y) {
 			System.out.println("Conexion no creada con exito!!");
 		}
-		return id;
+		
+	}
+	
+	public void updatePlayer(String username,int total_points) {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn = DriverManager.getConnection(urlDatos,usuario,pass);
+			String query = "update PLAYERS set Total_Points = ? where Player_name = ?";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setInt(1,total_points);
+			ps.setString(2, username);
+			ps.executeUpdate();
+		} catch (ClassNotFoundException x) {
+			System.out.println("EL driver no se a cargado con exito");
+		} catch (SQLException y) {
+			System.out.println("Conexion no creada con exito!!");
+		}
 	}
 	
 }
