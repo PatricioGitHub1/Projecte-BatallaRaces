@@ -1,4 +1,6 @@
-insert into PLAYERS (Player_name,Total_Points) values ('Root',150);
+insert into PLAYERS (Player_name,Total_Points) values ('ALexsdsdadadadda',150);
+
+
 
 insert into WEAPONS (Weapon_id,Weapon_name,Weapon_Image_Path,Speed,Strength,Points_value) values (1,'Daga','./imagenes/daga.jpg',3,0,10);
 insert into WEAPONS (Weapon_id,Weapon_name,Weapon_Image_Path,Speed,Strength,Points_value) values (2,'Espasa','./imagenes/espasa.jpg',1,1,10);
@@ -104,15 +106,16 @@ insert into WEAPONS_AVAILABLE (Warrior_id,Weapon_id) values (12,5);
 insert into WEAPONS_AVAILABLE (Warrior_id,Weapon_id) values (12,7);
 insert into WEAPONS_AVAILABLE (Warrior_id,Weapon_id) values (12,8);
 
-insert into BATTLE (Player_id,Warrior_id,Warrior_Weapon_id,Opponent_id,Opponent_Weapon_id,
-Injuries_Caused,Injuries_Suffered,Battle_Points) values(1,2,4,9,8,40,35,100);
 
-insert into ROUNDS (Round_id,Battle_id,Warrior_id,Warrior_Weapon_id,Opponent_id,Opponent_Weapon_id,
-Injuries_Caused,Injuries_Suffered) values(1,1,2,4,9,9,7,0);
 
 select * from WEAPONS;
 select * from WARRIORS;
-select * from PLAYERS;
+select * from PLAYERS order by total_points desc;
+
+select * from ROUNDS;
+SELECT * FROM BATTLE;
+
+
 
 
 

@@ -38,7 +38,8 @@ Battle_Points int);
 
 
 create table if not exists ROUNDS(
-Round_id int,
+Round_id int primary key auto_increment,
+Round_Number int,
 Battle_id int,
 Warrior_id int,
 Warrior_Weapon_id int,
@@ -48,7 +49,7 @@ Injuries_Caused int,
 Injuries_Suffered int);
 
 
-alter table ROUNDS add constraint PK_ROUNDS primary key (Round_id,Battle_id);
+
 alter table BATTLE add constraint FK_PLAYER_BATTLE
 	foreign key(Player_id)
     references PLAYERS(Player_id);
