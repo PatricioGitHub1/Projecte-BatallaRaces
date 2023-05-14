@@ -38,7 +38,6 @@ public class Fight{
 	public void lucha (String username,Warrior warrior_enemy, Weapons weapons_enemy,Warrior user_warrior,Weapons user_weapon) {
 		VentanaLucha vn = VentanaLucha.getInstance();
 		rounds++;
-		System.out.println(total_points);
 		if (rounds == 1) {
 			turn = getFasterWarrior(user_warrior, warrior_enemy, user_weapon, weapons_enemy);
 		}
@@ -49,20 +48,13 @@ public class Fight{
 		if (turn) {
 			vn.consoleText("Round number "+rounds+" | Turn of "+username);
 			turn = roundFight(user_warrior, warrior_enemy,user_weapon,weapons_enemy,turn);
-			roundsarray.add(new Rounds(bd.cogerId(username),user_warrior.getId(),user_weapon.getId(),warrior_enemy.getId(),weapons_enemy.getId(),getTotalDamage(),0));
+			roundsarray.add(new Rounds(rounds,0,user_warrior.getId(),user_weapon.getId(),warrior_enemy.getId(),weapons_enemy.getId(),getTotalDamage(),0));
 		} else if (!turn) {
 			vn.consoleText("Round number "+rounds+" | Turn of bot");	
 			turn = roundFight(warrior_enemy, user_warrior,weapons_enemy,user_weapon,turn);
-			roundsarray.add(new Rounds(bd.cogerId(username),user_warrior.getId(),user_weapon.getId(),warrior_enemy.getId(),weapons_enemy.getId(),0,getTotalDamage()));
+			roundsarray.add(new Rounds(rounds,0,user_warrior.getId(),user_weapon.getId(),warrior_enemy.getId(),weapons_enemy.getId(),0,getTotalDamage()));
 		}
 		
-		if (warrior_enemy.getHealth()<=0 || user_warrior.getHealth()<=0) {
-			rounds=0;
-			if (warrior_enemy.getHealth()<=0) {
-				total_points=warrior_enemy.getPoints_value()+weapons_enemy.getPoints_value();
-			}
-			new EndFightWindow(user_warrior,warrior_enemy,username,total_points);
-		}
 		
 		
 		
@@ -186,32 +178,35 @@ public class Fight{
 
 class EndFightWindow {
 
-    public EndFightWindow(Warrior user,Warrior bot,String username,int total_points) {
+    public EndFightWindow(Warrior user,Warrior bot,String username,int total_points,Weapons weapon) {
         String message = "Do you want to keep fighting?";
         int answer;
         answer = JOptionPane.showOptionDialog(null, message, "End Of Battle", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
-        actionJOption(answer, user,bot,username,total_points);
+        actionJOption(answer, user,bot,username,total_points,weapon);
     }
     
-    public void actionJOption(int single_case, Warrior user, Warrior bot,String username,int total_points) {
+    public void actionJOption(int single_case, Warrior user, Warrior bot,String username,int total_points,Weapons weapon) {
     	VentanaLucha vn = VentanaLucha.getInstance();
     	BBDD bd = new BBDD();
         if (single_case == JOptionPane.YES_OPTION) {
             //CASE ANSWER IS YES, AND CHECK IF USER IS ALIVE
             if (user.getHealth() <= 0) {
                 //VIDA MENOR QUE 0
-                System.out.println("USUARIO PERDIO Y DIO QUE SI");
-                
                 bd.updatePlayer(username, total_points);
                 user.resetStats();
                 bot.resetStats();
+                String imagen="./imagenes/-.jpg";
+                vn.dispose();
+                new VentanaLucha(imagen,imagen,imagen,imagen,0,username,null,null,null,null);
             } else {
                 //VIDA MAYOR QUE 0
-                System.out.println("USUARIO GANO Y DIO QUE SI");
                 user.resetStats();
                 bot.resetStats();
+                bd.updatePlayer(username, total_points);
                 WarriorEnemy we = new WarriorEnemy();
                 we.Enemy_Random();
+                vn.dispose();
+                new VentanaLucha(user.getImage_path(),weapon.getWeapon_image_path() , we.getWarrior_enemy().getImage_path(), we.getWeapon().getWeapon_image_path(), user.getId(), username, we.getWarrior_enemy(), we.getWeapon(), user, weapon);
             }
         } else {
             //CASE ANSWER IS NO,//

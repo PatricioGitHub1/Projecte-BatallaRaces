@@ -76,6 +76,20 @@ public class VentanaLucha extends JFrame {
         chooseWeapon = new JButton("Choose Weapon");
         ranking = new JButton("Ranking");
         fight = new JButton("Fight");
+        if(user_warrior instanceof Elf) {
+			playimage.userMaximum(40);
+		}else if (user_warrior instanceof Human) {
+			playimage.userMaximum(50);
+		}else if (user_warrior instanceof Dwarf){
+			playimage.userMaximum(60);
+		}
+		if(warrior_enemy instanceof Elf) {
+			playimage.botMaximum(40);
+		}else if (warrior_enemy instanceof Human) {
+			playimage.botMaximum(50);
+		}else if (warrior_enemy instanceof Dwarf){
+			playimage.botMaximum(60);
+		}
         
         
         
@@ -96,20 +110,9 @@ public class VentanaLucha extends JFrame {
         panel0.add(panel3);
         panel0.add(scrollPane);
 		f=new Fight();
-		if(user_warrior instanceof Elf) {
-			playimage.userMaximum(60);
-		}else if (user_warrior instanceof Human) {
-			playimage.userMaximum(50);
-		}else {
-			playimage.userMaximum(40);
-		}
-		if(warrior_enemy instanceof Elf) {
-			playimage.botMaximum(60);
-		}else if (warrior_enemy instanceof Human) {
-			playimage.botMaximum(50);
-		}else {
-			playimage.botMaximum(40);
-		}
+		
+		
+		
 
         ranking.addActionListener(new ActionListener() {
 			
@@ -157,18 +160,35 @@ public class VentanaLucha extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (userimg!="./imagenes/-.jpg" && userweapon!="./imagenes/-.jpg") {
-					f.lucha(username, warrior_enemy, weapons_enemy, user_warrior, user_weapon);
-					playimage.userProgBar(user_warrior.getHealth());
-					playimage.botProgBar(warrior_enemy.getHealth());
-					playimage.userAgilitiBar(user_warrior.getAgility()*10);
-					playimage.userDefBar(user_warrior.getDefense()*10);
-					playimage.userPowerBar(user_warrior.getStrength()+user_weapon.getStrength()*10);
-					playimage.userSpeedBar(user_warrior.getSpeed()+user_weapon.getSpeed()*10);
-					playimage.botAgilitiBar(warrior_enemy.getAgility()*10);
-					playimage.botDefBar(warrior_enemy.getDefense()*10);
-					playimage.botPowerBar(warrior_enemy.getStrength()+weapons_enemy.getStrength()*10);
-					playimage.botSpeedBar(warrior_enemy.getSpeed()+weapons_enemy.getSpeed()*10);
+					if (warrior_enemy.getHealth()<=0 || user_warrior.getHealth()<=0) {
+						f.setRounds(0);
+						
+						if (warrior_enemy.getHealth()<=0) {
+							f.setTotal_points(warrior_enemy.getPoints_value()+weapons_enemy.getPoints_value());
+							bd.insertBattle(bd.cogerId(),user_warrior.getId(),user_weapon.getId(),warrior_enemy.getId(),weapons_enemy.getId(), warrior_enemy.getInitial_health()-warrior_enemy.getHealth(), user_warrior.getInitial_health()-user_warrior.getHealth(),f.getTotal_points());
+							bd.addRounds(f.getRoundsarray());
+							f.getRoundsarray().clear();
+						}else if(user_warrior.getHealth()<=0) {
+							bd.insertBattle(bd.cogerId(),user_warrior.getId(),user_weapon.getId(),warrior_enemy.getId(),weapons_enemy.getId(), warrior_enemy.getInitial_health()-warrior_enemy.getHealth(), user_warrior.getInitial_health()-user_warrior.getHealth(),0);
+							bd.addRounds(f.getRoundsarray());
+							f.getRoundsarray().clear();
+						}
+						new EndFightWindow(user_warrior,warrior_enemy,username,f.getTotal_points(),user_weapon);
+					}else {
+						f.lucha(username, warrior_enemy, weapons_enemy, user_warrior, user_weapon);
+						playimage.userProgBar(user_warrior.getHealth());
+						playimage.botProgBar(warrior_enemy.getHealth());
+						playimage.userAgilitiBar(user_warrior.getAgility()*10);
+						playimage.userDefBar(user_warrior.getDefense()*10);
+						playimage.userPowerBar(user_warrior.getStrength()+user_weapon.getStrength()*10);
+						playimage.userSpeedBar(user_warrior.getSpeed()+user_weapon.getSpeed()*10);
+						playimage.botAgilitiBar(warrior_enemy.getAgility()*10);
+						playimage.botDefBar(warrior_enemy.getDefense()*10);
+						playimage.botPowerBar(warrior_enemy.getStrength()+weapons_enemy.getStrength()*10);
+						playimage.botSpeedBar(warrior_enemy.getSpeed()+weapons_enemy.getSpeed()*10);
 
+					}
+					
 				}
 				
 			}

@@ -29,14 +29,19 @@ public class WarriorEnemy {
 			warrior_enemy = w1.getWarriorarray().get(num2);
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(urlDatos,usuario,pass);
-			String query = "select * from WEAPONS_AVAILABLE where Warrior_id ="+w1.getWarriorarray().get(2).getId();
+			String query = "select Weapon_id from WEAPONS_AVAILABLE where Warrior_id ="+warrior_enemy.getId();
 			PreparedStatement ps = conn.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
-				arrayids.add(rs.getInt(2));
+				arrayids.add(rs.getInt(1));
 			}
-			num1 = random.nextInt(arrayids.size());
-			weapon = w2.getWeaponsarray().get(num1);
+			num1 = (int)(Math.random()*(arrayids.size()));
+			for (Weapons weapons1:w2.getWeaponsarray()) {
+				if(arrayids.get(num1)==weapons1.getId()) {
+					weapon = weapons1;
+					break;
+				}
+			}
 			
 			
 			

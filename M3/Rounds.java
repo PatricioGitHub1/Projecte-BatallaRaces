@@ -1,6 +1,7 @@
 
 public class Rounds {
-	private int player_id;
+	private int rounds_id;
+	private int battle_id;
 	private int warrior_id;
 	private int warrior_weapon_id;
 	private int opponent_id;
@@ -8,10 +9,11 @@ public class Rounds {
 	private int injuries_Caused;
 	private int injuries_Suffered;
 	
-	public Rounds(int player_id, int warrior_id, int warrior_weapon_id, int opponent_id, int opponent_weapon_id,
+	public Rounds(int rounds_id,int battle_id, int warrior_id, int warrior_weapon_id, int opponent_id, int opponent_weapon_id,
 			int injuries_Caused, int injuries_Suffered) {
 		super();
-		this.player_id = player_id;
+		this.rounds_id = rounds_id;
+		this.battle_id=battle_id;
 		this.warrior_id = warrior_id;
 		this.warrior_weapon_id = warrior_weapon_id;
 		this.opponent_id = opponent_id;
@@ -20,12 +22,12 @@ public class Rounds {
 		this.injuries_Suffered = injuries_Suffered;
 	}
 
-	public int getPlayer_id() {
-		return player_id;
+	public int getRounds_id() {
+		return rounds_id;
 	}
 
-	public void setPlayer_id(int player_id) {
-		this.player_id = player_id;
+	public void setRounds_id(int rounds_id) {
+		this.rounds_id = rounds_id;
 	}
 
 	public int getWarrior_id() {
