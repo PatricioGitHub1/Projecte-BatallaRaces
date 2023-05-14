@@ -8,7 +8,7 @@ public class Elf extends Warrior{
 	
 	public Elf(int id, String name, String image_path) {
 		super(id, name, image_path);
-		setInitial_health(getHealth());
+		setInitial_health(40);
 		setStrength(strength);
 		setAgility(agility);
 		setDefense(defense);

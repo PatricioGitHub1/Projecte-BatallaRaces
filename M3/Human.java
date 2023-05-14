@@ -8,7 +8,7 @@ public class Human extends Warrior{
 	
 	public Human(int id, String name, String image_path) {
 		super(id, name, image_path);
-		setInitial_health(getHealth());
+		setInitial_health(50);
 		setStrength(strength);
 		setAgility(agility);
 		setDefense(defense);

@@ -8,7 +8,7 @@ public class Dwarf extends Warrior{
 	
 	public Dwarf(int id, String name, String image_path) {
 		super(id, name, image_path);
-		setInitial_health(getHealth());
+		setInitial_health(60);
 		setStrength(strength);
 		setAgility(agility);
 		setDefense(defense);

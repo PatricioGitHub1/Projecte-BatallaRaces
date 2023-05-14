@@ -23,8 +23,9 @@ public class FrameWeapons extends JFrame{
 	private String urlDatos = "jdbc:mysql://localhost/RacesPAC?serverTimezone=UTC";
 	private String usuario = "root";
 	private String pass = "1234";
-	
-	FrameWeapons(int id,String warriorpath,String username,String botimg, String botweapon,Warrior warrior_enemy, Weapons weapons_enemy,Warrior user_warrior,Weapons user_weapon){
+	private String userweaponpath;
+	private Weapons userweapon;
+	FrameWeapons(int id,String warriorpath,String username,String botimg, String botweapon,Warrior warrior_enemy, Weapons weapons_enemy,Warrior user_warrior){
 		ArrayList<Integer> arrayid = new ArrayList<Integer>();
 		arraylabels = new ArrayList<JLabel>();
 		WeaponsContainer w1 = new WeaponsContainer();
@@ -65,7 +66,9 @@ public class FrameWeapons extends JFrame{
 							}
 						}
 						dispose();
-						new VentanaLucha(warriorpath,w1.getWeaponsarray().get(z).getWeapon_image_path(),botimg,botweapon,id,username,warrior_enemy,weapons_enemy,user_warrior,w1.getWeaponsarray().get(z));
+						userweaponpath = w1.getWeaponsarray().get(z).getWeapon_image_path();
+						userweapon = w1.getWeaponsarray().get(z);
+						new VentanaLucha(warriorpath,userweaponpath,botimg,botweapon,id,username,warrior_enemy,weapons_enemy,user_warrior,userweapon);
 						
 					}
 					

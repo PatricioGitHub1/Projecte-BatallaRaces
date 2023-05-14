@@ -20,7 +20,9 @@ public class FrameWarriors extends JFrame{
 
 	private JPanel p0,p1,p2,p3;
 	private ArrayList<JLabel> arraylabels;
-	private int id;
+	private String userwarriorpath,botwarriorpath,botweaponpath;
+	private Warrior userwarrior;
+	
 	
 	
 	
@@ -50,7 +52,12 @@ public class FrameWarriors extends JFrame{
 					we.Enemy_Random();
 					Warrior warrior_enemy = we.getWarrior_enemy();
 					Weapons weapon_enemy = we.getWeapon();
-					new VentanaLucha(w1.getWarriorarray().get(index).getImage_path(), "./imagenes/-.jpg", we.getWarrior_enemy().getImage_path(),we.getWeapon().getWeapon_image_path() ,id_warrior,username,warrior_enemy,weapon_enemy,w1.getWarriorarray().get(index),null);
+					userwarriorpath=w1.getWarriorarray().get(index).getImage_path();
+					botwarriorpath = we.getWarrior_enemy().getImage_path();
+					botweaponpath = we.getWeapon().getWeapon_image_path();
+					userwarrior = w1.getWarriorarray().get(index);
+					
+					new VentanaLucha(userwarriorpath,"./imagenes/-.jpg",botwarriorpath ,botweaponpath,id_warrior,username,warrior_enemy,weapon_enemy,userwarrior,null);
 					
 					
 				}

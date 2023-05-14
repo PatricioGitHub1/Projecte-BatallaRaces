@@ -78,6 +78,7 @@ public class VentanaLucha extends JFrame {
         fight = new JButton("Fight");
         
         
+        
         panel1.add(chooseCharacter);
         panel1.add(chooseWeapon);
         panel1.add(ranking);
@@ -94,7 +95,21 @@ public class VentanaLucha extends JFrame {
         panel0.add(panel2);
         panel0.add(panel3);
         panel0.add(scrollPane);
-		f=new Fight( userimg,  userweapon,  botimg,  botweapon);
+		f=new Fight();
+		if(user_warrior instanceof Elf) {
+			playimage.userMaximum(60);
+		}else if (user_warrior instanceof Human) {
+			playimage.userMaximum(50);
+		}else {
+			playimage.userMaximum(40);
+		}
+		if(warrior_enemy instanceof Elf) {
+			playimage.botMaximum(60);
+		}else if (warrior_enemy instanceof Human) {
+			playimage.botMaximum(50);
+		}else {
+			playimage.botMaximum(40);
+		}
 
         ranking.addActionListener(new ActionListener() {
 			
@@ -111,8 +126,8 @@ public class VentanaLucha extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				if (f.getRounds()>=1) {
+					f.setTotal_points(0);
 					f.getRoundsarray().clear();
-					bd.updatePlayer(username, f.getTotal_points());
 					
 				}
 				dispose();
@@ -128,7 +143,7 @@ public class VentanaLucha extends JFrame {
 				if (userimg!="./imagenes/-.jpg") {
 					clearConsole();
 					dispose();
-					new FrameWeapons(id,userimg,username,botimg,botweapon,warrior_enemy,weapons_enemy,user_warrior,user_weapon);
+					new FrameWeapons(id,userimg,username,botimg,botweapon,warrior_enemy,weapons_enemy,user_warrior);
 				}else {
 					consoleText("Tienes que elegir primer un guerrero");
 				}
@@ -143,6 +158,17 @@ public class VentanaLucha extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (userimg!="./imagenes/-.jpg" && userweapon!="./imagenes/-.jpg") {
 					f.lucha(username, warrior_enemy, weapons_enemy, user_warrior, user_weapon);
+					playimage.userProgBar(user_warrior.getHealth());
+					playimage.botProgBar(warrior_enemy.getHealth());
+					playimage.userAgilitiBar(user_warrior.getAgility()*10);
+					playimage.userDefBar(user_warrior.getDefense()*10);
+					playimage.userPowerBar(user_warrior.getStrength()+user_weapon.getStrength()*10);
+					playimage.userSpeedBar(user_warrior.getSpeed()+user_weapon.getSpeed()*10);
+					playimage.botAgilitiBar(warrior_enemy.getAgility()*10);
+					playimage.botDefBar(warrior_enemy.getDefense()*10);
+					playimage.botPowerBar(warrior_enemy.getStrength()+weapons_enemy.getStrength()*10);
+					playimage.botSpeedBar(warrior_enemy.getSpeed()+weapons_enemy.getSpeed()*10);
+
 				}
 				
 			}
@@ -190,21 +216,16 @@ class PlayersImage extends JPanel{
 	private int weaponimageWidth = 140;
     private int weaponimageHeight = 98;
     
-    private int hp_user;
-	private int hp_bot;
+    private JProgressBar barrabot,barrauser,barrausupower,barrausuagility,barraususpeed,barrausudefense,bbrrabotpower,bbrrabotagility,bbrrabotspeed,bbrrabotdefense;
 	private String userimg1,userweapon1,botimg1,botweapon1;
 	
-	public PlayersImage() {
-		// TODO Auto-generated constructor stub
-	}
+	
     
     public PlayersImage(String userimg, String userweapon, String botimg, String botweapon) {
     	userimg1 = userimg;
     	userweapon1 = userweapon;
     	botimg1 = botimg;
     	botweapon1 = botweapon;
-    	hp_user = 100;
-		hp_bot = 100;
 		setPreferredSize(new Dimension(1250,525));
 		setOpaque(false);
 		
@@ -215,7 +236,7 @@ class PlayersImage extends JPanel{
 		
 		usupower = new JLabel("Power");
 		usuagility = new JLabel("Agility");
-		ususpeed = new JLabel("Apeed");
+		ususpeed = new JLabel("Speed");
 		usudefense = new JLabel("Defense");
 		
 		usupower.setFont(new Font("Arial", Font.BOLD, 20));
@@ -225,16 +246,74 @@ class PlayersImage extends JPanel{
 		
 		botpower = new JLabel("Power");
 		botagility = new JLabel("Agility");
-		botspeed = new JLabel("Apeed");
+		botspeed = new JLabel("Speed");
 		botdefense = new JLabel("Defense");
 		
 		botpower.setFont(new Font("Arial", Font.BOLD, 20));
 		botagility.setFont(new Font("Arial", Font.BOLD, 20));
 		botspeed.setFont(new Font("Arial", Font.BOLD, 20));
 		botdefense.setFont(new Font("Arial", Font.BOLD, 20));
+		Font font = new Font("Arial", Font.BOLD, 15);
 		
+		// BARRA PROGRESION ARMA
+		barrausupower = new JProgressBar();
+		barrausuagility = new JProgressBar();
+		barraususpeed = new JProgressBar();
+		barrausudefense = new JProgressBar();
 		
+		bbrrabotpower = new JProgressBar();
+		bbrrabotagility = new JProgressBar();
+		bbrrabotspeed = new JProgressBar();
+		bbrrabotdefense = new JProgressBar();
 		
+		barrausupower.setMinimum(0);
+		barrausupower.setMaximum(100);
+		barrausupower.setValue(0);
+		barrausupower.setForeground(Color.red);
+		barrausupower.setBackground(Color.white);
+
+		barrausuagility.setMinimum(0);
+		barrausuagility.setMaximum(100);
+		barrausuagility.setValue(0);
+		barrausuagility.setForeground(Color.green);
+		barrausuagility.setBackground(Color.white);
+
+		barraususpeed.setMinimum(0);
+		barraususpeed.setMaximum(100);
+		barraususpeed.setValue(0);
+		barraususpeed.setForeground(Color.blue);
+		barraususpeed.setBackground(Color.white);
+
+		barrausudefense.setMinimum(0);
+		barrausudefense.setMaximum(100);
+		barrausudefense.setValue(0);
+		barrausudefense.setForeground(Color.darkGray);
+		barrausudefense.setBackground(Color.white);
+		//----------------------------------------------------------------------
+		bbrrabotpower.setMinimum(0);
+		bbrrabotpower.setMaximum(100);
+		bbrrabotpower.setValue(0);
+		bbrrabotpower.setForeground(Color.red);
+		bbrrabotpower.setBackground(Color.white);
+		
+		bbrrabotagility.setMinimum(0);
+		bbrrabotagility.setMaximum(100);
+		bbrrabotagility.setValue(0);
+		bbrrabotagility.setForeground(Color.green);
+		bbrrabotagility.setBackground(Color.white);
+
+		bbrrabotspeed.setMinimum(0);
+		bbrrabotspeed.setMaximum(100);
+		bbrrabotspeed.setValue(0);
+		bbrrabotspeed.setForeground(Color.blue);
+		bbrrabotspeed.setBackground(Color.white);
+
+		bbrrabotdefense.setMinimum(0);
+		bbrrabotdefense.setMaximum(100);
+		bbrrabotdefense.setValue(0);
+		bbrrabotdefense.setForeground(Color.darkGray);
+		bbrrabotdefense.setBackground(Color.white);
+
 		panel2.add(usupower);
 		panel2.add(usuagility);
 		panel2.add(ususpeed);
@@ -244,6 +323,55 @@ class PlayersImage extends JPanel{
 		panel3.add(botagility);
 		panel3.add(botspeed);
 		panel3.add(botdefense);
+		
+		this.add(barrausupower);
+		this.add(barrausuagility);
+		this.add(barraususpeed);
+		this.add(barrausudefense);
+		
+		this.add(bbrrabotpower);
+		this.add(bbrrabotagility);
+		this.add(bbrrabotspeed);
+		this.add(bbrrabotdefense);
+
+
+		barrausupower.setBounds(300, 431, 201, 22); 
+		barrausuagility.setBounds(300, 453, 201, 22);
+		barraususpeed.setBounds(300, 474, 201, 22);
+		barrausudefense.setBounds(300, 496, 201, 22);
+		
+		bbrrabotpower.setBounds(1049, 431, 201, 22); 
+		bbrrabotagility.setBounds(1049, 453, 201, 22);
+		bbrrabotspeed.setBounds(1049, 474, 201, 22);
+		bbrrabotdefense.setBounds(1049, 496, 201, 22);
+		
+
+		
+		// BARRA PROGRESION USUARIOS
+		barrabot = new JProgressBar();
+		barrabot.setMinimum(0);
+		barrabot.setMaximum(0);
+		barrabot.setStringPainted(true);
+		barrabot.setValue(0);
+		barrabot.setForeground(Color.green);
+		barrabot.setBackground(Color.RED);
+		barrabot.setFont(font);
+		
+		barrauser = new JProgressBar();
+		barrauser.setMinimum(0);
+		barrauser.setMaximum(0);
+		barrauser.setStringPainted(true);
+		barrauser.setValue(0);
+		barrauser.setStringPainted(true);
+		barrauser.setValue(0);
+		barrauser.setForeground(Color.green);
+		barrauser.setBackground(Color.RED);
+		barrauser.setFont(font);
+		
+		this.add(barrabot);
+		this.add(barrauser);
+		barrauser.setBounds(0, 1, 501, 60);
+		barrabot.setBounds(750, 1, 500, 60);
 		this.setLayout(null);
 		panel2.setBounds(150, 431, 100, 95);
 		panel3.setBounds(900, 431, 100, 95);
@@ -255,53 +383,12 @@ class PlayersImage extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // VIDA DE USUARIO Y DEL ENEMIGO
-        String user_life = Integer.toString(hp_user)+"%";
-		String bot_life = Integer.toString(hp_bot)+"%";
 		// Link de la foto character
 		String linkcharacteruser = userimg1;
 		String linkcharacterbot = botimg1;
 		// Link de la foto weapon
 		String linkweaponuser = userweapon1;
 		String linkweaponbot = botweapon1;
-		
-		
-		
-        
-		
-		
-		//se cambia el tercer valor a menor
-		//power
-		g.setColor(Color.red);
-		g.fillRect(301, 432, 199, 22); 
-		//agiliti
-		g.setColor(Color.green);
-		g.fillRect(301, 455, 199, 22);
-		//speed
-		g.setColor(Color.blue);
-		g.fillRect(301, 478, 199, 22);
-		//def
-		g.setColor(Color.darkGray);
-		g.fillRect(301, 501, 199, 22);
-		
-		
-		
-		
-		//se cambia el tercer valor a menor
-		//power
-		g.setColor(Color.red);
-		g.fillRect(1050, 432, 199, 22); 
-		//agiliti
-		g.setColor(Color.green);
-		g.fillRect(1050, 455, 199, 22);
-		//speed
-		g.setColor(Color.blue);
-		g.fillRect(1050, 478, 199, 22);
-		//def
-		g.setColor(Color.darkGray);
-		g.fillRect(1050, 501, 199, 22);
-		
-		//versus
 		try {
         	//foto usuario
         	versus = ImageIO.read(new File("./imagenes/versus.jpg"));
@@ -310,9 +397,6 @@ class PlayersImage extends JPanel{
         } catch (IOException e) {
             e.printStackTrace();
         }
-		
-		
-		
 		// IMAGENES CHARACTERS
         try {
         	//foto usuario
@@ -349,8 +433,44 @@ class PlayersImage extends JPanel{
         
     }
     
-    public void hola() {
-    	System.out.println("hola");
+    /*---------------------------------------------------*/
+    public void userProgBar(Integer total) {
+        barrauser.setValue(total);
+    }
+    public void botProgBar(Integer total) {
+        barrabot.setValue(total);
+    }
+    public void userMaximum(Integer total) {
+    	barrauser.setMaximum(total);
+    }
+    public void botMaximum(Integer total) {
+    	barrabot.setMaximum(total);
+    }
+    /*----------------------------------------------------*/
+    public void userPowerBar(Integer total) {
+    	barrausupower.setValue(total);
+    }
+    public void userSpeedBar(Integer total) {
+    	barrausuagility.setValue(total);
+    }
+    public void userAgilitiBar(Integer total) {
+    	barraususpeed.setValue(total);
+    }
+    public void userDefBar(Integer total) {
+    	barrausudefense.setValue(total);
+    }
+    /*----------------------------------------------------*/
+    public void botPowerBar(Integer total) {
+    	bbrrabotpower.setValue(total);
+    }
+    public void botSpeedBar(Integer total) {
+    	bbrrabotagility.setValue(total);
+    }
+    public void botAgilitiBar(Integer total) {
+    	bbrrabotspeed.setValue(total);
+    }
+    public void botDefBar(Integer total) {
+    	bbrrabotdefense.setValue(total);
     }
     
 }
