@@ -116,14 +116,6 @@ insert into WEAPONS_AVAILABLE (Warrior_id,Weapon_id) values (12,7);
 insert into WEAPONS_AVAILABLE (Warrior_id,Weapon_id) values (12,8);
 
 
-select * from WEAPONS;
-select * from WARRIORS;
-select * from PLAYERS order by total_points desc;
-
-select * from ROUNDS;
-SELECT * FROM BATTLE;
-
-
 
 
 
