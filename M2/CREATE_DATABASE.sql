@@ -22,7 +22,7 @@ Player_name varchar(45),
 Total_Points int);
 
 create table if not exists WEAPONS_AVAILABLE(
-Warrior_id int not null,	
+Warrior_id int,	
 Weapon_id int);
 
 create table if not exists BATTLE(
