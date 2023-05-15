@@ -1,4 +1,13 @@
-insert into PLAYERS (Player_name,Total_Points) values ('ALexsdsdadadadda',150);
+insert into PLAYERS (Player_name,Total_Points) values ('Alex',150);
+insert into PLAYERS (Player_name,Total_Points) values ('Alex',150);
+insert into PLAYERS (Player_name,Total_Points) values ('Patricio',300);
+insert into PLAYERS (Player_name,Total_Points) values ('Cristian',100);
+insert into PLAYERS (Player_name,Total_Points) values ('Pepe',132);
+insert into PLAYERS (Player_name,Total_Points) values ('Anuel',12);
+insert into PLAYERS (Player_name,Total_Points) values ('Cbum',34);
+insert into PLAYERS (Player_name,Total_Points) values ('Manolo',67);
+insert into PLAYERS (Player_name,Total_Points) values ('JuanLuis',98);
+insert into PLAYERS (Player_name,Total_Points) values ('Antonio',13);
 
 
 
@@ -105,7 +114,6 @@ insert into WEAPONS_AVAILABLE (Warrior_id,Weapon_id) values (12,4);
 insert into WEAPONS_AVAILABLE (Warrior_id,Weapon_id) values (12,5);
 insert into WEAPONS_AVAILABLE (Warrior_id,Weapon_id) values (12,7);
 insert into WEAPONS_AVAILABLE (Warrior_id,Weapon_id) values (12,8);
-
 
 
 select * from WEAPONS;
