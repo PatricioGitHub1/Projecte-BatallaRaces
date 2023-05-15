@@ -1,12 +1,12 @@
 insert into PLAYERS (Player_name,Total_Points) values ('Alex',150);
-insert into PLAYERS (Player_name,Total_Points) values ('Alex',150);
+insert into PLAYERS (Player_name,Total_Points) values ('Jordi',1110);
 insert into PLAYERS (Player_name,Total_Points) values ('Patricio',300);
 insert into PLAYERS (Player_name,Total_Points) values ('Cristian',100);
-insert into PLAYERS (Player_name,Total_Points) values ('Pepe',132);
+insert into PLAYERS (Player_name,Total_Points) values ('Pepe',22);
 insert into PLAYERS (Player_name,Total_Points) values ('Anuel',12);
 insert into PLAYERS (Player_name,Total_Points) values ('Cbum',34);
-insert into PLAYERS (Player_name,Total_Points) values ('Manolo',67);
-insert into PLAYERS (Player_name,Total_Points) values ('JuanLuis',98);
+insert into PLAYERS (Player_name,Total_Points) values ('Manolo',15);
+insert into PLAYERS (Player_name,Total_Points) values ('JuanLuis',58);
 insert into PLAYERS (Player_name,Total_Points) values ('Antonio',13);
 
 
