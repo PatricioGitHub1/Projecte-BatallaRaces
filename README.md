@@ -7,3 +7,4 @@ Descarregar el .jar i fer-lo accessible per el projecte.
  ---
  ### Creadors
  **Patricio Rojas** : projascondori.cf@iesesteveterradas.cat
+ **Alex Martinez** : amartinezgonzalez.cf@iesesteveterradas.cat
