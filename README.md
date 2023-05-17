@@ -6,6 +6,6 @@ Descarregar el .jar i fer-lo accessible per el projecte.
 3. Per iniciar el joc s'ha d'executar el codi desde la clase **'MainWindow.java'**.  
  ---
  ### Creadors
- **Patricio Rojas** : projascondori.cf@iesesteveterradas.cat
- **Alex Martinez** : amartinezgonzalez.cf@iesesteveterradas.cat
- **Cristian Alvarez** : calvarezmartinez@iesesteveterradas.cat
+ **Patricio Rojas** : projascondori.cf@iesesteveterradas.cat .
+ **Alex Martinez** : amartinezgonzalez.cf@iesesteveterradas.cat .
+ **Cristian Alvarez** : calvarezmartinez@iesesteveterradas.cat .
